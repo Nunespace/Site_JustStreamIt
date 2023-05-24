@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+  }
+
+body {
+    font-family: 'Lato', sans-serif;
+    
+}
+
+section {
+    background-color: black;
+    color: aliceblue;
+
+}
+
+header,
+footer {
+  background-color: #7995ac;
+  padding: 20px 50px;
+  margin : auto;
+}
+
+header,
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 75px 20px 200px;
+  }
+
+.navbar__link {
+    margin-left: 30px;
+    color: #242424;
+    text-decoration: none;
+    font-size: 1.5em;
+  }
+
+  .categories {
+    display : flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding : 50px 50px 50px 50px;
+    margin : auto;
+    border : 5px solid; 
+  }
+
+  .meilleurFilm {
+    border : 5px double ;
+}
+
+
+  .filmsMieuxNotes {
+    padding : 50px;
+  }
+
+  .categorie1 {
+    border-color : #1fde62;
+  }
+  
