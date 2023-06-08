@@ -8,16 +8,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <title>JustStreamIt - Accueil</title>
-    <link href="style/style.css" rel="stylesheet" />
+    <link href="style/style.css" rel="stylesheet">
+    <link href="style/modal.css" rel="stylesheet">
     <script src="scripts/data.js" defer></script>
     <script src="scripts/buttuns.js" defer></script>
+    <script src="scripts/modal.js" defer></script>
     <script src="scripts/main.js" defer></script>
     
 </head>
 <body>
     <header>
         <div>
-            <h1 class="logo">JustStreamIt</h1>
+            <h1 >JustStreamIt</h1>
         </div>
         <nav class="navbar">
                 <a class="navbar__link" href="index.html">Accueil</a>
@@ -27,28 +29,34 @@
     <main>
         <section class="categories">
             <h1>Meilleur film</h1>
-            <div class="categories bestMovie">
-            </div>
-            <br>
-            <h1>--------------Films les mieux notés--------------</h1>
+                <div class=container id="bestMovie">
+                </div>
+                <div id="modal"></div>
+            <h1>Films les mieux notés</h1>
             <!-- div class carrousel? -->
                 <div class="container" id="bestMovies">
+                    <img src="images/bouton.png" alt="bouton gauche" class="buttun buttunLeft" id="rewBestMovies">
+                    <img src="images/bouton.png" alt="bouton droit" class="buttun buttunRight" id="fwdBestMovies">
                 </div>
-                <img src="images/bouton.png" class="buttun" id="rewBestMovies" />
-                <img src="images/bouton.png" class="buttun" id="fwdBestMovies" />
+               
 
-                <h1>Catégorie Comédie</h1>
-                <!-- div class carrousel? -->
-                    <div class="container" id="comedy">
-                    </div>
+            <h1>Catégorie "Comédie"</h1>
+            <!-- div class carrousel? -->
+                <div class="container" id="category1">
+                    <img src="images/bouton.png" alt="bouton gauche" class="buttun buttunLeft" id="rewCategory1">
+                    <img src="images/bouton.png" alt="bouton droit" class="buttun buttunRight" id="fwdCategory1">
+                </div>
+                
             
             <div class="categories category2">
                 <h1>Catégorie 2</h1>
             </div>
-            <div class="categories category3">
+            <div class="categories category3" id="essai">
                 <h1>Catégorie 3</h1>
             </div>
+           
         </section>
+        
 
 
     </main>
