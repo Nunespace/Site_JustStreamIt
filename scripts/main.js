@@ -13,11 +13,10 @@ bestMovie.recoverPoster()
 const idBestMovies = "bestMovies"
 const rankBestMovies = 0
 let urlbestMovies = ArrayUrl.bestMoviesUrl()
-const bestFilms = new Posters(urlbestMovies, idBestMovies, rankBestMovies, "bestMovies")
-bestFilms.recoverPosters()
 let storedPostersBestMovies = getPostersLocalStorage(rankBestMovies)
-bestFilms.displayPosters(storedPostersBestMovies)
-const buttunBestMovies = new Buttun("rewBestMovies", "fwdBestMovies", "bestMovies", storedPostersBestMovies)
+const bestFilms = new Posters(urlbestMovies, idBestMovies, rankBestMovies, "bestMovies", storedPostersBestMovies)
+bestFilms.recoverAndDisplayPosters()
+const buttunBestMovies = new Buttun("rewBestMovies", "fwdBestMovies", rankBestMovies, storedPostersBestMovies)
 buttunBestMovies.clickButtun()
 
 
@@ -27,12 +26,13 @@ const idCategory1 = "category1"
 const rankCategory1 = 1
 const category1 = "comedy"
 let urlCategory1 = ArrayUrl.categoryUrl(category1)
-const filmsCategory1 = new Posters(urlCategory1, idCategory1, rankCategory1, category1)
-filmsCategory1.recoverPosters()
 let storedPostersCategory1 = getPostersLocalStorage(rankCategory1)
-filmsCategory1.displayPosters(storedPostersCategory1)
-const buttunCategory1 = new Buttun("rewCategory1", "fwdCategory1", category1, storedPostersCategory1)
+const filmsCategory1 = new Posters(urlCategory1, idCategory1, rankCategory1, category1, storedPostersCategory1)
+filmsCategory1.recoverAndDisplayPosters()
+const buttunCategory1 = new Buttun("rewCategory1", "fwdCategory1", rankCategory1, storedPostersCategory1)
 buttunCategory1.clickButtun()
+
+
 
 
 

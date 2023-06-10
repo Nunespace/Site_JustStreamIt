@@ -3,11 +3,11 @@
  * pour faire avancer ou reculer les affiches des films 
  */
 class Buttun {
-    constructor(idLeft, idRight, category, storedPosters){
+    constructor(idLeft, idRight, rank, storedPosters){
         this.idLeft = idLeft;
         this.idRight = idRight;
-        this.category = category;
-        this.storedPosters=storedPosters;
+        this.rank = rank;
+        this.storedPosters = storedPosters;
     }
     /**
      * Cette fonction déplace les affiches des films en changeant la source (src) des images
@@ -15,9 +15,15 @@ class Buttun {
      */
     displayPosters(indexImage){
         // Affichage de 4 affiches à partir de l'image n°indexImage
-        for (let i=0 ; i<4; i++) {
-            const idName="image"+i+this.category
-            const imageElement = document.getElementById(idName);
+        console.log("Ecran : "+window.screen.width+"px")
+        let iMax = 4;
+        // change le défilement des images pour les écrans inférieurs à 1200px
+        if (window.screen.width <= 1200){
+            iMax=7
+        }
+        for (let i=0 ; i<iMax; i++) {
+            let dataSetId = this.rank+"_"+i;
+            const imageElement = document.getElementById(dataSetId);
             imageElement.src = this.storedPosters[indexImage];
             indexImage++
         }
@@ -30,6 +36,7 @@ class Buttun {
         let buttunLeft=document.getElementById(this.idLeft);
         let index=0;
             buttunLeft.addEventListener("click", () =>{
+            console.log("j'ai cliqué sur le bouton gauche")
             index--
                 if (index>=0){
                     this.displayPosters(index);
@@ -38,9 +45,16 @@ class Buttun {
             }
         });
         let buttunRight=document.getElementById(this.idRight);
+        let iMax = 4;
+        // change le défilement des images pour les écrans inférieurs à 1200px
+        if (window.screen.width <= 1200){
+            iMax=7
+        }
         buttunRight.addEventListener("click", () =>{
+            console.log("j'ai cliqué sur le bouton droit")
             index++;
-            if (index<4){
+            console.log("index = " + index)
+            if (index<iMax){
                 this.displayPosters(index);
             }
             else{

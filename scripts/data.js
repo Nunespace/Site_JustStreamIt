@@ -31,13 +31,14 @@ class ArrayUrl{
  * et afficher 4 images pour la catégorie instanciée
  */
 class Posters{
-    constructor(url, id, rank, category) {
+    constructor(url, id, rank, category, storedPosters) {
         this.url = url;
         this.id = id;
         this.rank = rank;
         this.category= category;
+        this.storedPosters = storedPosters;
      }
-    async recoverPosters() {
+    async recoverAndDisplayPosters() {
     try{
             let url = this.url[0]
             const response = await fetch(url)
@@ -53,31 +54,37 @@ class Posters{
             if (this.category==="bestMovies"){
                 films.shift()
             }
+            const listIdPosters = []
+            for (let i = 0; i<7; i++){
+                listIdPosters.push(films[i].id)
+            }
             const rank= this.rank
+            this.displayPosters(listIdPosters)
+            // activation de la fonction du module modal.js
+            listOpenModal()
             // Stockage des urls des affiches dans le localStorage
             for (let i=0; i<7; i++){
                 const nomImage ="image" + rank + i;
                 let image = JSON.stringify(films[i].image_url);
                 window.localStorage.setItem(nomImage, image);
-            }
-            
+            }   
         }catch{
             alert("Désolé, les affiches des films n'ont pas pu être récupérées. Essayez d'actualiser la page.")
         }
     }
-    displayPosters(storedPosters){
-        const films = storedPosters;
-        const id = this.id;
+    displayPosters(listIdPosters){
+        const films = this.storedPosters;
         for (let i=0; i<4; i++) {
-            const container = document.getElementById(id);
-            const nomImage ="image" + i+ this.category;
+            const idPoster = listIdPosters[i];
+            const container = document.getElementById(this.id);
             const imageElement = document.createElement("img");
             imageElement.className="poster"
             imageElement.alt=`Affiche du film ${i}`
             imageElement.src = films[i];
-            imageElement.id= nomImage;
+            imageElement.id= this.rank+"_"+i;
+            imageElement.dataset.id = idPoster;
             container.appendChild(imageElement);
-        }
+            }
     }
 }
 
@@ -97,7 +104,6 @@ class BestMovie{
                 let films =page1.results;
                 const id = films[0].id
                 let posterUrl = films[0].image_url
-                console.log(id)
                 // Stockage de l'url de l'affiche dans le localStorage
                 const nomImage ="imageMeilleur_film";
                 let image = JSON.stringify(films[0].image_url);
