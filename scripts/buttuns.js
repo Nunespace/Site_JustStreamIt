@@ -3,11 +3,12 @@
  * pour faire avancer ou reculer les affiches des films 
  */
 class Buttun {
-    constructor(idLeft, idRight, rank, storedPosters){
+    constructor(idLeft, idRight, rank){
         this.idLeft = idLeft;
         this.idRight = idRight;
         this.rank = rank;
-        this.storedPosters = storedPosters;
+        // Cette fonction est dans le fichier data.js : elle crée une liste d'url des affiches à partir du local storage
+        this.storedPosters = getPostersLocalStorage(this.rank);
     }
     /**
      * Cette fonction déplace les affiches des films en changeant la source (src) des images

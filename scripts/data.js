@@ -31,12 +31,11 @@ class ArrayUrl{
  * et afficher 4 images pour la catégorie instanciée
  */
 class Posters{
-    constructor(url, id, rank, category, storedPosters) {
+    constructor(url, id, rank) {
         this.url = url;
         this.id = id;
         this.rank = rank;
-        this.category= category;
-        this.storedPosters = storedPosters;
+        this.storedPosters = getPostersLocalStorage(this.rank);
      }
     async recoverAndDisplayPosters() {
     try{
@@ -51,7 +50,7 @@ class Posters{
             for (let j =0; j < filmsPage2.length; j++){
                 films.push(filmsPage2[j])
             }
-            if (this.category==="bestMovies"){
+            if (this.id==="bestMovies"){
                 films.shift()
             }
             const listIdPosters = []
@@ -122,8 +121,9 @@ class BestMovie{
             const imageElement = document.createElement("img");
             imageElement.className="poster"
             imageElement.alt= "Affiche du meilleur film"
-                imageElement.src = "https://m.media-amazon.com/images/M/MV5BNDEyYTA5OWEtYjNiYS00MGZlLThjYzEtMTc1Zjk2NDRmZmYxXkEyXkFqcGdeQXVyNzIwNTQyMw@@._V1_UY268_CR1,0,182,268_AL_.jpg";
-                imageElement.id= id;
+                imageElement.src = posterUrl;
+                imageElement.id= "bestMovie_"+0;
+                imageElement.dataset.id = id
                 container.appendChild(imageElement);
         }
 }
