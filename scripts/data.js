@@ -58,31 +58,39 @@ class Posters{
                 listIdPosters.push(films[i].id)
             }
             const rank= this.rank
-            this.displayPosters(listIdPosters)
+            this.displayPosters()
+            const lastCategory = this.lastCategory                                                                                         
             // activation de la fonction du module modal.js
             listOpenModal()
-            // Stockage des urls des affiches dans le localStorage
+            
+            
             for (let i=0; i<7; i++){
-                const nomImage ="image" + rank + i;
+                // Stockage des urls des affiches dans le localStorage
+                const imageName ="image" + rank + i;
                 let image = JSON.stringify(films[i].image_url);
-                window.localStorage.setItem(nomImage, image);
-            }   
+                window.localStorage.setItem(imageName, image);
+                // Stockage des id (API) des films dans le localStorage
+                const idApiName ="id" + rank + "_" + i;
+                let idApi = JSON.stringify(listIdPosters[i]);
+                window.localStorage.setItem(idApiName, idApi);
+            }
         }catch{
             alert("Désolé, les affiches des films n'ont pas pu être récupérées. Essayez d'actualiser la page.")
         }
     }
-    displayPosters(listIdPosters){
-        const films = this.storedPosters;
+    displayPosters(){
+        const posters = this.storedPosters[0]
+        const idFilms = this.storedPosters[1]
         for (let i=0; i<4; i++) {
-            const idPoster = listIdPosters[i];
-            const container = document.getElementById(this.id);
-            const imageElement = document.createElement("img");
+            const idPoster = idFilms[i]
+            const container = document.getElementById(this.id)
+            const imageElement = document.createElement("img")
             imageElement.className="poster"
             imageElement.alt=`Affiche du film ${i}`
-            imageElement.src = films[i];
-            imageElement.id= this.rank+"_"+i;
+            imageElement.src = posters[i]
+            imageElement.id= this.rank+"_"+i
             imageElement.dataset.id = idPoster;
-            container.appendChild(imageElement);
+            container.appendChild(imageElement)
             }
     }
 }
@@ -111,8 +119,6 @@ class BestMovie{
             }catch{
                 alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
             }
-            console.log(id)
-            
         }
         displayPoster(posterUrl, id){
             let film = window.localStorage.getItem("imageMeilleur_film");
@@ -130,16 +136,25 @@ class BestMovie{
 
 /**
 * Cette fonction crée une liste (array) "storedPosters" contenant les url des affiches des 
-* 7 meilleurs films de la catégorie, à partir du local storage
+* 7 meilleurs films de la catégorie, ainsi qu'une liste de leur id (API) à partir du local storage
 * @param {string} rank soit bestMovies ou une des catégories
+* @param {string} keyLocalStorage pour choisir une liste
 */
 function getPostersLocalStorage(rank){
-    let storedPosters = [];
+    let storedPosters = []
+    let storedId = []
     for (let i=0; i<7; i++){
-        let nomImage = "image" + rank + i;
-        let film = window.localStorage.getItem(nomImage);
-        film = JSON.parse(film)
-        storedPosters.push(film)
+        let imageName = "image" + rank + i
+        let poster = window.localStorage.getItem(imageName);
+        poster = JSON.parse(poster)
+        storedPosters.push(poster)
+        const idApiName ="id" + rank + "_" + i
+        let idFilm = window.localStorage.getItem(idApiName)
+        idFilm = JSON.parse(idFilm)
+        storedId.push(idFilm)
     }
-    return storedPosters
+    
+    return [storedPosters, storedId]
+   
+   
 }

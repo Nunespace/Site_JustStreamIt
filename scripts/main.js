@@ -30,9 +30,11 @@ bestMovie.recoverPoster()
 const urlbestMovies = ArrayUrl.bestMoviesUrl()
 const urlCategory1 = ArrayUrl.categoryUrl("comedy")
 const urlCategory2 = ArrayUrl.categoryUrl("history")
+const urlCategory3 = ArrayUrl.categoryUrl("drama")
 categories(urlbestMovies, "bestMovies", 0, "rewBestMovies", "fwdBestMovies")
 categories(urlCategory1, "category1", 1, "rewCategory1", "fwdCategory1")
 categories(urlCategory2, "category2", 2, "rewCategory2", "fwdCategory2")
+categories(urlCategory3, "category3", 3, "rewCategory3", "fwdCategory3")
 }
 
 main()

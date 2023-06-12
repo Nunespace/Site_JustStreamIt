@@ -5,7 +5,6 @@ function listOpenModal(){
     const openModal = listOpenModal[i];
     openModal.onclick = function(event) {  
     moviedata(openModal.dataset.id);
-    console.log(openModal.dataset.id)
       }
   }
 }

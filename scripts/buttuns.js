@@ -23,11 +23,14 @@ class Buttun {
             iMax=7
         }
         for (let i=0 ; i<iMax; i++) {
-            let dataSetId = this.rank+"_"+i;
-            const imageElement = document.getElementById(dataSetId);
-            imageElement.src = this.storedPosters[indexImage];
+            let posterIdHtml = this.rank+"_"+i;
+            const imageElement = document.getElementById(posterIdHtml)
+            imageElement.src = this.storedPosters[0][indexImage]
+            imageElement.dataset.id = this.storedPosters[1][indexImage]
             indexImage++
+
         }
+        listOpenModal()
     }
     /**
      * index correspond au n° de l'image dans la clé du localstorage. Cette fonction ajoute ou retranche de 1 l'index à chaque click sur les boutons 
@@ -37,7 +40,6 @@ class Buttun {
         let buttunLeft=document.getElementById(this.idLeft);
         let index=0;
             buttunLeft.addEventListener("click", () =>{
-            console.log("j'ai cliqué sur le bouton gauche")
             index--
                 if (index>=0){
                     this.displayPosters(index);
@@ -48,13 +50,11 @@ class Buttun {
         let buttunRight=document.getElementById(this.idRight);
         let iMax = 4;
         // change le défilement des images pour les écrans inférieurs à 1200px
-        if (window.screen.width <= 1200){
+        if (window.screen.width <= 1225){
             iMax=7
         }
         buttunRight.addEventListener("click", () =>{
-            console.log("j'ai cliqué sur le bouton droit")
             index++;
-            console.log("index = " + index)
             if (index<iMax){
                 this.displayPosters(index);
             }
