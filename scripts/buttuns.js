@@ -23,7 +23,7 @@ class Buttun {
             iMax=7
         }
         for (let i=0 ; i<iMax; i++) {
-            let posterIdHtml = this.rank+"_"+i;
+            let posterIdHtml = this.rank + "_" + i;
             const imageElement = document.getElementById(posterIdHtml)
             imageElement.src = this.storedPosters[0][indexImage]
             imageElement.dataset.id = this.storedPosters[1][indexImage]
@@ -37,35 +37,45 @@ class Buttun {
      ** et active la fonction displayPosters
      */
     clickButtun(){
-        let buttunLeft=document.getElementById(this.idLeft);
-        let index=0;
+        let buttunLeft = document.getElementById(this.idLeft)
+        let index = 0
             buttunLeft.addEventListener("click", () =>{
             index--
-                if (index>=0){
-                    this.displayPosters(index);
+                if (index >= 0){
+                    this.displayPosters(index)
                 }else{
-                    index++;
+                    index++
             }
         });
-        let buttunRight=document.getElementById(this.idRight);
-        let iMax = 4;
+        let buttunRight=document.getElementById(this.idRight)
+        let iMax = 4
         // change le défilement des images pour les écrans inférieurs à 1200px
         if (window.screen.width <= 1225){
-            iMax=7
+            iMax = 7
         }
         buttunRight.addEventListener("click", () =>{
-            index++;
+            index++
             if (index<iMax){
                 this.displayPosters(index);
             }
             else{
-                index--;
+                index--
             }
-        });
+        })
     }
-     
 }
 
+function navSmartScreen(){
+    const footer = document.querySelector("footer")
+    if (screen.width <= 1225){
+        let html =`
+        <nav class="navbar">
+            <a class="navbar__link" href="index.html">Accueil</a>
+            <a class="navbar__link" href="#categories">Catégories</a>
+        </nav>`
+        footer.innerHTML = html
+    }
 
+}
 
 

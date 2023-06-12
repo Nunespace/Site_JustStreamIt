@@ -16,12 +16,12 @@ class ArrayUrl{
     }
     static bestMoviesUrl(){
         const url1 = 'http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=1'
-        const url2='http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2'
+        const url2 ='http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2'
         return [url1, url2]
     }
     static categoryUrl(genre){
         const url1 = `http://localhost:8000/api/v1/titles?sort_by=-imdb_score&genre=${genre}&page=1`
-        const url2=`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&genre=${genre}&page=2`
+        const url2 =`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&genre=${genre}&page=2`
         return [url1, url2]
     }
 }
@@ -32,32 +32,32 @@ class ArrayUrl{
  */
 class Posters{
     constructor(url, id, rank) {
-        this.url = url;
-        this.id = id;
-        this.rank = rank;
-        this.storedPosters = getPostersLocalStorage(this.rank);
+        this.url = url
+        this.id = id
+        this.rank = rank
+        this.storedPosters = getPostersLocalStorage(this.rank)
      }
     async recoverAndDisplayPosters() {
     try{
             let url = this.url[0]
             const response = await fetch(url)
-            const page1 = await response.json(); 
-            let films =page1.results;
+            const page1 = await response.json()
+            let films = page1.results
             let url2 = this.url[1]
             const response2 = await fetch(url2)
-            const page2 = await response2.json();
-            let filmsPage2 = page2.results;
-            for (let j =0; j < filmsPage2.length; j++){
+            const page2 = await response2.json()
+            let filmsPage2 = page2.results
+            for (let j =0 ; j < filmsPage2.length; j++){
                 films.push(filmsPage2[j])
             }
-            if (this.id==="bestMovies"){
+            if (this.id === "bestMovies"){
                 films.shift()
             }
             const listIdPosters = []
-            for (let i = 0; i<7; i++){
+            for (let i = 0; i < 7; i++){
                 listIdPosters.push(films[i].id)
             }
-            const rank= this.rank
+            const rank = this.rank
             this.displayPosters()
             const lastCategory = this.lastCategory                                                                                         
             // activation de la fonction du module modal.js
@@ -66,13 +66,13 @@ class Posters{
             
             for (let i=0; i<7; i++){
                 // Stockage des urls des affiches dans le localStorage
-                const imageName ="image" + rank + i;
-                let image = JSON.stringify(films[i].image_url);
-                window.localStorage.setItem(imageName, image);
+                const imageName = "image" + rank + i
+                let image = JSON.stringify(films[i].image_url)
+                window.localStorage.setItem(imageName, image)
                 // Stockage des id (API) des films dans le localStorage
-                const idApiName ="id" + rank + "_" + i;
-                let idApi = JSON.stringify(listIdPosters[i]);
-                window.localStorage.setItem(idApiName, idApi);
+                const idApiName = "id" + rank + "_" + i
+                let idApi = JSON.stringify(listIdPosters[i])
+                window.localStorage.setItem(idApiName, idApi)
             }
         }catch{
             alert("Désolé, les affiches des films n'ont pas pu être récupérées. Essayez d'actualiser la page.")
@@ -101,36 +101,36 @@ class Posters{
  */
 class BestMovie{
     constructor(url){
-        this.url=url;
+        this.url=url
     }
     async recoverPoster() {
         try{
                 let url = this.url
                 const response = await fetch(url)
-                const page1 = await response.json(); 
-                let films =page1.results;
+                const page1 = await response.json()
+                let films =page1.results
                 const id = films[0].id
                 let posterUrl = films[0].image_url
                 // Stockage de l'url de l'affiche dans le localStorage
-                const nomImage ="imageMeilleur_film";
-                let image = JSON.stringify(films[0].image_url);
-                window.localStorage.setItem(nomImage, image); 
+                const nomImage ="imageMeilleur_film"
+                let image = JSON.stringify(films[0].image_url)
+                window.localStorage.setItem(nomImage, image)
                 this.displayPoster(posterUrl, id)
             }catch{
                 alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
             }
         }
         displayPoster(posterUrl, id){
-            let film = window.localStorage.getItem("imageMeilleur_film");
+            let film = window.localStorage.getItem("imageMeilleur_film")
             //film = JSON.parse(film)
-            const container = document.getElementById("bestMovie");
-            const imageElement = document.createElement("img");
-            imageElement.className="poster"
-            imageElement.alt= "Affiche du meilleur film"
-                imageElement.src = posterUrl;
-                imageElement.id= "bestMovie_"+0;
+            const container = document.getElementById("bestMovie")
+            const imageElement = document.createElement("img")
+            imageElement.className ="poster"
+            imageElement.alt = "Affiche du meilleur film"
+                imageElement.src = posterUrl
+                imageElement.id = "bestMovie_"+0
                 imageElement.dataset.id = id
-                container.appendChild(imageElement);
+                container.appendChild(imageElement)
         }
 }
 
@@ -143,12 +143,12 @@ class BestMovie{
 function getPostersLocalStorage(rank){
     let storedPosters = []
     let storedId = []
-    for (let i=0; i<7; i++){
+    for (let i = 0; i < 7; i++){
         let imageName = "image" + rank + i
-        let poster = window.localStorage.getItem(imageName);
+        let poster = window.localStorage.getItem(imageName)
         poster = JSON.parse(poster)
         storedPosters.push(poster)
-        const idApiName ="id" + rank + "_" + i
+        const idApiName = "id" + rank + "_" + i
         let idFilm = window.localStorage.getItem(idApiName)
         idFilm = JSON.parse(idFilm)
         storedId.push(idFilm)
