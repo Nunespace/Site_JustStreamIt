@@ -4,11 +4,11 @@
  */
 class Buttun {
     constructor(idLeft, idRight, rank){
-        this.idLeft = idLeft;
-        this.idRight = idRight;
-        this.rank = rank;
+        this.idLeft = idLeft
+        this.idRight = idRight
+        this.rank = rank
         // Cette fonction est dans le fichier data.js : elle crée une liste d'url des affiches à partir du local storage
-        this.storedPosters = getPostersLocalStorage(this.rank);
+        this.storedPosters = getPostersLocalStorage(this.rank)
     }
     /**
      * Cette fonction déplace les affiches des films en changeant la source (src) des images
@@ -16,19 +16,24 @@ class Buttun {
      */
     displayPosters(indexImage){
         // Affichage de 4 affiches à partir de l'image n°indexImage
-        console.log("Ecran : "+window.screen.width+"px")
-        let iMax = 4;
+        console.log("Largeur de l'écran : " + window.screen.width + "px")
+        console.log("Largeur de la fenêtre : " + window.innerWidth + "px")
         // change le défilement des images pour les écrans inférieurs à 1200px
-        if (window.screen.width <= 1200){
-            iMax=7
-        }
-        for (let i=0 ; i<iMax; i++) {
-            let posterIdHtml = this.rank + "_" + i;
+        if (window.innerWidth <= 1200){
+            let posterIdHtml = this.rank + "_" + 0;
             const imageElement = document.getElementById(posterIdHtml)
             imageElement.src = this.storedPosters[0][indexImage]
             imageElement.dataset.id = this.storedPosters[1][indexImage]
             indexImage++
-
+        }else{
+            for (let i=0 ; i<4; i++) {
+                console.log("i"+i)
+                let posterIdHtml = this.rank + "_" + i;
+                const imageElement = document.getElementById(posterIdHtml)
+                imageElement.src = this.storedPosters[0][indexImage]
+                imageElement.dataset.id = this.storedPosters[1][indexImage]
+                indexImage++
+            }
         }
         listOpenModal()
     }
@@ -39,18 +44,18 @@ class Buttun {
     clickButtun(){
         let buttunLeft = document.getElementById(this.idLeft)
         let index = 0
-            buttunLeft.addEventListener("click", () =>{
+        buttunLeft.addEventListener("click", () =>{
             index--
-                if (index >= 0){
-                    this.displayPosters(index)
-                }else{
-                    index++
+            if (index >= 0){
+                this.displayPosters(index)
+            }else{
+                index++
             }
         });
         let buttunRight=document.getElementById(this.idRight)
         let iMax = 4
         // change le défilement des images pour les écrans inférieurs à 1200px
-        if (window.screen.width <= 1225){
+        if (window.innerWidth <= 1200){
             iMax = 7
         }
         buttunRight.addEventListener("click", () =>{
@@ -58,6 +63,7 @@ class Buttun {
             if (index<iMax){
                 this.displayPosters(index);
             }
+            //remise de index à sa valeur précédente
             else{
                 index--
             }
@@ -65,9 +71,9 @@ class Buttun {
     }
 }
 
-function navSmartScreen(){
+function changingScreenSize(){
     const footer = document.querySelector("footer")
-    if (screen.width <= 1225){
+    if (window.innerWidth <= 1200){
         let html =`
         <nav class="navbar">
             <a class="navbar__link" href="index.html">Accueil</a>
@@ -75,7 +81,9 @@ function navSmartScreen(){
         </nav>`
         footer.innerHTML = html
     }
-
+    addEventListener("resize", () => {
+        location.reload()
+    })
 }
 
 

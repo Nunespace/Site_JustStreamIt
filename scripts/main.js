@@ -35,7 +35,7 @@ categories(urlbestMovies, "bestMovies", 0, "rewBestMovies", "fwdBestMovies")
 categories(urlCategory1, "category1", 1, "rewCategory1", "fwdCategory1")
 categories(urlCategory2, "category2", 2, "rewCategory2", "fwdCategory2")
 categories(urlCategory3, "category3", 3, "rewCategory3", "fwdCategory3")
-navSmartScreen()
+changingScreenSize()
 }
 
 main()

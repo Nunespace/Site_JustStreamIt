@@ -11,12 +11,12 @@
  */
 class ArrayUrl{
     static bestMovieUrl(){
-        const url = 'http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=1'
+        const url = "http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=1"
         return url
     }
     static bestMoviesUrl(){
-        const url1 = 'http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=1'
-        const url2 ='http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2'
+        const url1 = "http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=1"
+        const url2 ="http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2"
         return [url1, url2]
     }
     static categoryUrl(genre){
@@ -36,9 +36,9 @@ class Posters{
         this.id = id
         this.rank = rank
         this.storedPosters = getPostersLocalStorage(this.rank)
-     }
+    }
     async recoverAndDisplayPosters() {
-    try{
+        try{
             let url = this.url[0]
             const response = await fetch(url)
             const page1 = await response.json()
@@ -58,8 +58,7 @@ class Posters{
                 listIdPosters.push(films[i].id)
             }
             const rank = this.rank
-            this.displayPosters()
-            const lastCategory = this.lastCategory                                                                                         
+            this.displayPosters()                                                                                        
             // activation de la fonction du module modal.js
             listOpenModal()
             
@@ -91,7 +90,7 @@ class Posters{
             imageElement.id= this.rank+"_"+i
             imageElement.dataset.id = idPoster;
             container.appendChild(imageElement)
-            }
+        }
     }
 }
 
@@ -105,33 +104,33 @@ class BestMovie{
     }
     async recoverPoster() {
         try{
-                let url = this.url
-                const response = await fetch(url)
-                const page1 = await response.json()
-                let films =page1.results
-                const id = films[0].id
-                let posterUrl = films[0].image_url
-                // Stockage de l'url de l'affiche dans le localStorage
-                const nomImage ="imageMeilleur_film"
-                let image = JSON.stringify(films[0].image_url)
-                window.localStorage.setItem(nomImage, image)
-                this.displayPoster(posterUrl, id)
-            }catch{
-                alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
-            }
+            let url = this.url
+            const response = await fetch(url)
+            const page1 = await response.json()
+            let films =page1.results
+            const id = films[0].id
+            // Stockage de l'url de l'affiche dans le localStorage
+            const nomImage ="imageMeilleur_film"
+            let image = JSON.stringify(films[0].image_url)
+            window.localStorage.setItem(nomImage, image)
+            this.displayPoster(id)
+        }catch{
+            alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
         }
-        displayPoster(posterUrl, id){
-            let film = window.localStorage.getItem("imageMeilleur_film")
-            //film = JSON.parse(film)
-            const container = document.getElementById("bestMovie")
-            const imageElement = document.createElement("img")
-            imageElement.className ="poster"
-            imageElement.alt = "Affiche du meilleur film"
-                imageElement.src = posterUrl
-                imageElement.id = "bestMovie_"+0
-                imageElement.dataset.id = id
-                container.appendChild(imageElement)
-        }
+    }
+    displayPoster(id){
+        let poster = window.localStorage.getItem("imageMeilleur_film")
+        console.log(poster)
+        poster = JSON.parse(poster)
+        const container = document.getElementById("bestMovie")
+        const imageElement = document.createElement("img")
+        imageElement.className ="poster"
+        imageElement.alt = "Affiche du meilleur film"
+        imageElement.src = poster
+        imageElement.id = "bestMovie_"+0
+        imageElement.dataset.id = id
+        container.appendChild(imageElement)
+    }
 }
 
 /**
@@ -155,6 +154,4 @@ function getPostersLocalStorage(rank){
     }
     
     return [storedPosters, storedId]
-   
-   
 }
