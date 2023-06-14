@@ -13,24 +13,39 @@ Les données des films sont récupérées depuis une API "maison" : OCMovies-API
 
 
 
-## Installation et exécution de l'application
+## Installation
 
-1. Cloner le dépôt de code de l'API à l'aide de la commande `$ git clone clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git` (vous pouvez également télécharger le code [en temps qu'archive zip](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR/archive/refs/heads/master.zip))
+
+### 1° Installation et exécution de l'API OCMovies-API
+
+1. Ouvrez le terminal et cloner le dépôt de code de l'API à l'aide de la commande 
 ```
+$ git clone https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git
+```
+Vous pouvez également télécharger le code [en temps qu'archive zip](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR/archive/refs/heads/master.zip)
+
 Puis suivez les consignes d'installation indiquées dans le fichier README de l'API.
 
-Démarrer le serveur avec `$ python manage.py runserver`
 
-2. Ouvrez le terminal et tapez :
+2. Démarrer le serveur avec cette commande 
+```
+$ pipenv run python manage.py runserver
+```
+ou (selon le mode d'installation choisi pour l'API)
+```
+$ python manage.py runserver
+```
 
+### 2° Installation et exécution de l'application web
+
+1. Télécharger le code du site web en tapant 
 ```
 $ git clone https://github.com/Nunespace/Site_JustStreamIt.git
 ```
 Vous pouvez également télécharger le code en temps qu'archive zip : [Site_JustSreamIt](https://github.com/Nunespace/Site_JustStreamIt/archive/refs/heads/main.zip)
 
 
-
-3. Ouvrez le fichier index.html à partir de votre navigateur
+2. Ouvrez le fichier index.html à partir de votre navigateur
 
 OU
 

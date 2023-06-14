@@ -35,7 +35,6 @@ class Posters{
         this.url = url
         this.id = id
         this.rank = rank
-        this.storedPosters = getPostersLocalStorage(this.rank)
     }
     async recoverAndDisplayPosters() {
         try{
@@ -54,16 +53,11 @@ class Posters{
                 films.shift()
             }
             const listIdPosters = []
-            for (let i = 0; i < 7; i++){
-                listIdPosters.push(films[i].id)
-            }
+            const listUrlPosters = []
             const rank = this.rank
-            this.displayPosters()                                                                                        
-            // activation de la fonction du module modal.js
-            listOpenModal()
-            
-            
             for (let i=0; i<7; i++){
+                listIdPosters.push(films[i].id)
+                listUrlPosters.push(films[i].image_url)
                 // Stockage des urls des affiches dans le localStorage
                 const imageName = "image" + rank + i
                 let image = JSON.stringify(films[i].image_url)
@@ -73,22 +67,23 @@ class Posters{
                 let idApi = JSON.stringify(listIdPosters[i])
                 window.localStorage.setItem(idApiName, idApi)
             }
+            this.displayPosters(listIdPosters, listUrlPosters)                                                                                        
+            // activation de la fonction du module modal.js
+            listOpenModal()
         }catch{
             alert("Désolé, les affiches des films n'ont pas pu être récupérées. Essayez d'actualiser la page.")
         }
     }
-    displayPosters(){
-        const posters = this.storedPosters[0]
-        const idFilms = this.storedPosters[1]
+    displayPosters(listIdPosters, listUrlPosters){
         for (let i=0; i<4; i++) {
-            const idPoster = idFilms[i]
+            const idPoster = listIdPosters[i]
             const container = document.getElementById(this.id)
             const imageElement = document.createElement("img")
             imageElement.className="poster"
             imageElement.alt=`Affiche du film ${i}`
-            imageElement.src = posters[i]
+            imageElement.src = listUrlPosters[i]
             imageElement.id= this.rank+"_"+i
-            imageElement.dataset.id = idPoster;
+            imageElement.dataset.id = idPoster
             container.appendChild(imageElement)
         }
     }
@@ -109,19 +104,19 @@ class BestMovie{
             const page1 = await response.json()
             let films =page1.results
             const id = films[0].id
+            const urlPoster = films[0].image_url
             // Stockage de l'url de l'affiche dans le localStorage
             const nomImage ="imageMeilleur_film"
             let image = JSON.stringify(films[0].image_url)
             window.localStorage.setItem(nomImage, image)
-            this.displayPoster(id)
+            this.displayPoster(id, urlPoster)
         }catch{
             alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
         }
     }
-    displayPoster(id){
-        let poster = window.localStorage.getItem("imageMeilleur_film")
+    displayPoster(id, urlPoster){
+        let poster = urlPoster
         console.log(poster)
-        poster = JSON.parse(poster)
         const container = document.getElementById("bestMovie")
         const imageElement = document.createElement("img")
         imageElement.className ="poster"
