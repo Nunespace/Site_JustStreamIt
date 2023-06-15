@@ -1,20 +1,31 @@
-// Ouvre la modale quand l'utilisateur clique sur l'image
+/*********************************************************************************
+ * 
+ * Ce fichier contient les fonctions qui ouvrent et ferment une fenêtre modale
+ * contenant les informations d'un film quand on clique sur son affiche
+ * 
+ *********************************************************************************/
+
+
+/**
+* Cette fonction crée un écouteur d'évènement pour chaque affiche de film qui appelle
+* la fonction movieData
+*/
 function listOpenModal(){
     const listOpenModal = document.querySelectorAll(".poster")
     for (let i = 0; i < listOpenModal.length; i++){
         const openModal = listOpenModal[i]
         openModal.onclick = function(event) {  
-            moviedata(openModal.dataset.id)
+            movieData(openModal.dataset.id)
         }
     }
 }
 
 /**
-* Cette fonction lance une requête fetch auprès de l'API pour récupérer les données du film
-* puis crée des évènement pour ouvrir et fermer la modale 
+* Cette fonction lance une requête fetch auprès de l'API pour récupérer les données d'un film,
+* ouvre la modale puis crée des écouteurs d'évènement pour la fermer
 * @param {number} id extrait de l'API
 */
-async function moviedata(id){
+async function movieData(id){
     const url = `http://localhost:8000/api/v1/titles/${id}`
     try{
         const response = await fetch(url)

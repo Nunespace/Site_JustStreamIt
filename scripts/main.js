@@ -1,15 +1,16 @@
 /*********************************************************************************
  * 
- * Point d'entrée, c'est lui qui intialise l'affichage et lance les scripts. 
+ * Point d'entrée, c'est lui qui initialise l'affichage des films et lance les scripts. 
  * 
  *********************************************************************************/
 
 /**
-* Cette fonction affiche des meilleurs films d'une catégorie
-* et active les boutons droite (fwd) et gauche(rew) concernés.
+* Cette fonction affiche les meilleurs films d'une catégorie
+* et active les boutons droite (fwd) et gauche(rew) concernés en faisant appel
+* aux classes de data.js et buttuns.js
 * @param {string} urlCategory
-* @param {string} id Nom de la balise HTML id de la catégorie
-* @param {number} rank 0 : meilleurs films, 1 : catégorie 1, 2 : catégorie 2, etc.
+* @param {string} id de la balise html div de la catégorie
+* @param {number} rank "Films les mieux notés" : 0, catégorie 1 : 1, catégorie 2 : 2, etc.
 * @param {string} buttunLeft nom de la balise id du bouton gauche(rew) de la catégorie
 * @param {string} buttunRight nom de la balise id du bouton droit(fwd) de la catégorie
 */

@@ -1,6 +1,6 @@
 # Site web JustStreamIt 
 ***
-_Application web permettant de visualiser en temps réel un classement de films intéressants _
+Application web permettant de visualiser en temps réel un classement de films intéressants
 
 
 

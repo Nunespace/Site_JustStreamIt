@@ -1,13 +1,14 @@
 /*********************************************************************************
  * 
- * Ce fichier contient les classes nécessaires pour récupérer les données de l'API
- * afficher les affiches (4 par catégorie) et enregistrer les données 
- * dans le local storage
+ * Ce fichier contient les classes nécessaires pour récupérer les données de l'API,
+ * afficher les affiches (celle du meilleur film puis 4 par catégorie) et 
+ * enregistrer les données dans le local storage
  * 
  *********************************************************************************/
 
 /**
- * @class retourne les URL des requêtes auprès de l'API pour une catégorie
+ * @class 
+ * @returns{string} URL des requêtes auprès de l'API 
  */
 class ArrayUrl{
     static bestMovieUrl(){
@@ -28,7 +29,8 @@ class ArrayUrl{
 
 /**
  * @class contient les méthodes nécessaires pour récupérer les url des affiches des films
- * et afficher 4 images pour la catégorie instanciée
+ * et afficher 4 images pour la catégorie instanciée 
+ * (catégorie "films les mieux notés" ou catégorie 1 ou 2 ou 3)
  */
 class Posters{
     constructor(url, id, rank) {
@@ -36,6 +38,10 @@ class Posters{
         this.id = id
         this.rank = rank
     }
+    /**
+    * Cette fonction lance une requête auprès de l'API et appelle la fonction
+    * displayPosters pour afficher les films (hors meilleur film)
+    */
     async recoverAndDisplayPosters() {
         try{
             let url = this.url[0]
@@ -74,6 +80,9 @@ class Posters{
             alert("Désolé, les affiches des films n'ont pas pu être récupérées. Essayez d'actualiser la page.")
         }
     }
+    /**
+    * Cette fonction met à jour le DOM pour afficher les films (hors meilleur film)
+    */
     displayPosters(listIdPosters, listUrlPosters){
         for (let i=0; i<4; i++) {
             const idPoster = listIdPosters[i]
@@ -128,25 +137,5 @@ class BestMovie{
     }
 }
 
-/**
-* Cette fonction crée une liste (array) "storedPosters" contenant les url des affiches des 
-* 7 meilleurs films de la catégorie, ainsi qu'une liste de leur id (API) à partir du local storage
-* @param {string} rank soit bestMovies ou une des catégories
-* @param {string} keyLocalStorage pour choisir une liste
-*/
-function getPostersLocalStorage(rank){
-    let storedPosters = []
-    let storedId = []
-    for (let i = 0; i < 7; i++){
-        let imageName = "image" + rank + i
-        let poster = window.localStorage.getItem(imageName)
-        poster = JSON.parse(poster)
-        storedPosters.push(poster)
-        const idApiName = "id" + rank + "_" + i
-        let idFilm = window.localStorage.getItem(idApiName)
-        idFilm = JSON.parse(idFilm)
-        storedId.push(idFilm)
-    }
-    
-    return [storedPosters, storedId]
-}
+
+
