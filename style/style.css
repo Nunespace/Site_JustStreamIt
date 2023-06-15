@@ -5,7 +5,7 @@
 }
 
 /**
- * Eléments principaux
+ * Style applicable à toute la page
  */
 body {
   font-family: 'Lato', sans-serif;
@@ -22,18 +22,18 @@ header {
   top: 0;
   display: flex;
   background-color: #7995ac;
-  justify-content:space-evenly ;
-  padding: 50px 50px 50px 50px;
+  justify-content:space-between ;
+  padding: 30px;
 }
 
 header h1{
   display: inline-block;
-  margin: 0 0 0 70%;
+  margin: 0 0 0 25%;
 }
 
 .navbar {
   display : flex;
-  margin: 0 10% 0 30%;
+  margin: 0 35% 0 25%;
 }
 
 .navbar__link {
@@ -68,6 +68,59 @@ header h1{
   justify-content: center;
   position: relative;
 }
+
+/**
+ * Meilleur film
+ */
+ .bestMovie h1{
+  display:none;
+}
+h2, p{
+  width: 70%;
+  padding : 5%;
+  font-size: 1.2em;
+}
+h2{
+  width: 40%;
+  font-size: 1.8em;
+  text-align: center;
+}
+.buttunBestMovie{
+  display: block;
+  appearance: buttun;
+  background-color: #7995ac;
+  border-radius: 7px;
+  width: 8%;
+  height: 6%;
+  font-size: 1.1em;
+  text-align: center;
+  text-decoration: none;
+  /*background-color:#de1f58;*/
+  cursor: pointer;
+}
+/* enplacement du titre, bouton et du résumé*/
+#descriptionBestMovie{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* conteneur (titre, bouton play, résumé et affiche) du meilleur film*/
+.bestMovie{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  margin: 5% 0 5% 0 ;
+}
+/*Affiche du meilleur film*/
+#bestMovie_0{
+  width: 25%;
+  height: 30%;
+  margin :0;
+}
+
 /**
  * configuration du conteneur d'une catégorie d'affiches :
  * meilleurs films, catégorie 1, 2 et 3
@@ -79,6 +132,7 @@ header h1{
   justify-content: space-evenly;
   position: relative;
 }
+
 
 /**
  * Affiches des films
@@ -147,6 +201,7 @@ header h1{
   }
 
   h1{
+    padding-bottom: 5%;
     font-size: 1.2em;
   }
 
@@ -156,25 +211,33 @@ header h1{
     font-size: 1.8em;
   }
 
+  .bestMovie h1{
+    display: block;
+  }
+
   header .navbar {
     display:none;
   }
 
   footer .navbar{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 0;
+    margin: 0 25% 0 25%;
   }
 
   footer .navbar__link {
     padding: 0 15% 0 15% ;
-    margin: 0 35% 0 0%;
     color: #242424;
     text-decoration: none;
     font-size: 1.2em;
   }
 
-  .container{
+  #descriptionBestMovie{
+    display: none;
+  }
+
+  .container, .bestMovie{
     flex-direction: column;
     overflow: hidden;
     justify-content: start;
@@ -184,7 +247,7 @@ header h1{
     margin: 0;
   }
 
-  .poster{
+  .poster, #bestMovie_0{
     transform: scale(1);
     width: 55%;
     height: auto;

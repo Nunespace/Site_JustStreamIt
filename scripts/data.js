@@ -114,18 +114,45 @@ class BestMovie{
             let films =page1.results
             const id = films[0].id
             const urlPoster = films[0].image_url
+            const urlImdb = films[0].imdb_url
             // Stockage de l'url de l'affiche dans le localStorage
             const nomImage ="imageMeilleur_film"
             let image = JSON.stringify(films[0].image_url)
             window.localStorage.setItem(nomImage, image)
+            this.getTitleAndDescription(id, urlImdb)
             this.displayPoster(id, urlPoster)
+            //this.buttunBestMovie()
         }catch{
             alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
         }
     }
+    async getTitleAndDescription(id, urlImdb){
+        console.log(urlImdb)
+        const urlBestmovie = `http://localhost:8000/api/v1/titles/${id}`
+        try{
+            const response = await fetch(urlBestmovie)
+            const data = await response.json()
+            const title = data.title
+            const description = data.description
+            let divDescriptionBestMovie = document.getElementById("descriptionBestMovie")
+            let html = `
+            <h2>${title}</h2>
+            <a class="buttunBestMovie" target="_blank">Play</a>
+            <p>${description}</p>`
+            divDescriptionBestMovie.innerHTML=html
+        } catch {
+            console.log("Les informations du meilleur film n'ont pas pu être récupérées.")
+        }
+        const buttunBestMovie = document.querySelector(".buttunBestMovie")
+        buttunBestMovie.onclick = function() {  
+            console.log("ok!")
+            console.log(buttunBestMovie)
+            buttunBestMovie.href = `${urlImdb}`
+        }
+    }
+
     displayPoster(id, urlPoster){
         let poster = urlPoster
-        console.log(poster)
         const container = document.getElementById("bestMovie")
         const imageElement = document.createElement("img")
         imageElement.className ="poster"
