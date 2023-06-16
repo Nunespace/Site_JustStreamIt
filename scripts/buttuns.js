@@ -17,7 +17,7 @@ class Buttun {
         this.rank = rank
     }
     /**
-    * Cette fonction crée une liste (array) "storedPosters" contenant une liste des url des affiches des 
+    * crée une liste (array) "storedPosters" contenant une liste des url des affiches des 
     * 7 meilleurs films de la catégorie, ainsi qu'une liste "storedId" de leur id (API) à partir du local storage
     * @param {string} rank soit "bestMovies" ou une des catégories
     * @returns {Array<Arrays}
@@ -38,8 +38,8 @@ class Buttun {
         return [storedPosters, storedId]
     }
     /**
-     * index correspond à l'indice du 1er film à afficher. Cette fonction ajoute ou retranche de 1 l'indice à chaque clic 
-     * et active la fonction displayPosters
+     * ajoute ou retranche de 1 l'indice (index qui correspond à l'indice du 1er film à afficher) 
+     * à chaque clic et active la fonction displayPosters
      */
     clickButtun(){
         let buttunLeft = document.getElementById(this.idLeft)
@@ -76,7 +76,7 @@ class Buttun {
         })
     }
     /**
-     * Cette fonction déplace les affiches des films en changeant la source (src) des 4 images
+     * déplace les affiches des films en changeant la source (src) des 4 images
      * de la catégorie instanciée. Pour les écrans inférieurs à 800px, une seule image (img0) 
      * est affichée par catégorie.
      * @param {number} indexImg : à chaque clic l'indice de la 1ère image augmente ou diminue de 1

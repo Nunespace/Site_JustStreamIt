@@ -39,7 +39,7 @@ class Posters{
         this.rank = rank
     }
     /**
-    * Cette fonction lance une requête auprès de l'API et appelle la fonction
+    * lance une requête auprès de l'API et appelle la fonction
     * displayPosters pour afficher les films (hors meilleur film)
     */
     async recoverAndDisplayPosters() {
@@ -81,7 +81,9 @@ class Posters{
         }
     }
     /**
-    * Cette fonction met à jour le DOM pour afficher les films (hors meilleur film)
+    * met à jour le DOM pour afficher les films (hors meilleur film)
+    * @param{array} listIdPosters
+    * @param{array} listUrlPosters
     */
     displayPosters(listIdPosters, listUrlPosters){
         for (let i=0; i<4; i++) {
@@ -100,12 +102,17 @@ class Posters{
 
 /**
  * @class contient les méthodes nécessaires pour récupérer l'url de l'affiche du meilleur film
- * et pour l'afficher
+ * et afficher son titre, un bouton play, son résumé et son affiche
  */
 class BestMovie{
     constructor(url){
+        // l'URL est issue de la méthode statique de la classe ArrayUrl instanciée dans main.js
         this.url=url
     }
+    /**
+    * récupère les données du meilleur film et appelle les 
+    * méthodes display
+    */
     async recoverPoster() {
         try{
             let url = this.url
@@ -119,14 +126,19 @@ class BestMovie{
             const nomImage ="imageMeilleur_film"
             let image = JSON.stringify(films[0].image_url)
             window.localStorage.setItem(nomImage, image)
-            this.getTitleAndDescription(id, urlImdb)
+            this.displayTitleAndDescription(id, urlImdb)
             this.displayPoster(id, urlPoster)
-            //this.buttunBestMovie()
         }catch{
             alert("Désolé, l'affiche du meilleur film n'a pas pu être récupérée. Essayez d'actualiser la page.")
         }
     }
-    async getTitleAndDescription(id, urlImdb){
+    /**
+    * récupère le titre et le résumé du meilleur film auprès de l'API,
+    * puis les affiche avec un bouton "play"
+    * @param {number} id du film extrait de l'API
+    * @param {string} urlImdb 
+    */
+    async displayTitleAndDescription(id, urlImdb){
         console.log(urlImdb)
         const urlBestmovie = `http://localhost:8000/api/v1/titles/${id}`
         try{
@@ -150,7 +162,11 @@ class BestMovie{
             buttunBestMovie.href = `${urlImdb}`
         }
     }
-
+    /**
+    * affiche l'image du meilleur film
+    * @param {number} id du film extrait de l'API
+    * @param {string} urlPoster
+    */
     displayPoster(id, urlPoster){
         let poster = urlPoster
         const container = document.getElementById("bestMovie")

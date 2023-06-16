@@ -1,0 +1,7 @@
+/node_modules
+
+#environnement virtuel
+/env
+
+#fichiers json liés au linter ESLint
+*.json

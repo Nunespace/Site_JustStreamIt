@@ -14,7 +14,7 @@ function listOpenModal(){
     const listOpenModal = document.querySelectorAll(".poster")
     for (let i = 0; i < listOpenModal.length; i++){
         const openModal = listOpenModal[i]
-        openModal.onclick = function(event) {  
+        openModal.onclick = function() {  
             movieData(openModal.dataset.id)
         }
     }
