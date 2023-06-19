@@ -45,14 +45,12 @@ class Buttun {
         let buttunLeft = document.getElementById(this.idLeft)
         let indexImg0 = 0
         buttunLeft.addEventListener("click", () =>{
-            console.log("index entrée click: "+indexImg0)
             indexImg0--
             if (indexImg0 >= 0){
                 this.displayPosters(indexImg0)
             // si index < 0, il repasse à 0
             }else{
                 indexImg0++
-                console.log("indexElse: "+indexImg0)
             }
         })
         let buttunRight=document.getElementById(this.idRight)
@@ -63,7 +61,6 @@ class Buttun {
             iMax = 7
         }
         buttunRight.addEventListener("click", () =>{
-            console.log("indexImg0 entrée click: "+indexImg0)
             indexImg0++
             if (indexImg0<iMax){
                 this.displayPosters(indexImg0)
@@ -71,7 +68,6 @@ class Buttun {
             //si index > imax, il repasse à 0
             else{
                 indexImg0--
-                console.log("indexElse: "+indexImg0)
             }
         })
     }
@@ -82,7 +78,6 @@ class Buttun {
      * @param {number} indexImg : à chaque clic l'indice de la 1ère image augmente ou diminue de 1
      */
     displayPosters(indexImg){
-        console.log("index entrée display: "+indexImg)
         const storedPosters = this.getPostersLocalStorage(this.rank)
         if (window.innerWidth <= 800){
             let posterIdHtml = this.rank + "_" + 0
@@ -93,15 +88,11 @@ class Buttun {
         }else{
             // boucle sur les id (de 0 à 3) des balises img des 4 films affichés de la catégorie n°{rank} 
             for (let i=0 ; i<4; i++) {
-                console.log("i"+i)
                 let posterIdHtml = this.rank + "_" + i
                 const imageElement = document.getElementById(posterIdHtml)
                 imageElement.src = storedPosters[0][indexImg]
                 imageElement.dataset.id = storedPosters[1][indexImg]
-                console.log(indexImg)
-                console.log(storedPosters[1])
                 indexImg++
-                console.log(indexImg)
             }
         }
     }
