@@ -2,7 +2,7 @@
  * 
  * Ce fichier contient les classes nécessaires pour récupérer les données de l'API,
  * afficher les affiches (celle du meilleur film puis 4 par catégorie) et 
- * enregistrer les données dans le local storage
+ * enregistrer les données dans le local storage (mémoire locale)
  * 
  *********************************************************************************/
 

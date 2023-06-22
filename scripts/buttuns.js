@@ -8,7 +8,7 @@
 
 /**
  * @class crée une liste des id (API) des films et une liste des url des affiches;
- * A chaque "click" l'indice du 1er films à afficher change.
+ * A chaque "click" l'indice du 1er film à afficher change.
  */
 class Buttun {
     constructor(idLeft, idRight, rank){
